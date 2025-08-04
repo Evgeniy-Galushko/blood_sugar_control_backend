@@ -18,6 +18,9 @@ export const registerUser = async (payload) => {
 
   const newUser = await UsersCollection.create({
     ...payload,
+    age: null,
+    weight: null,
+    height: null,
     token: accessToken,
     password: encryptedPassword,
   });
@@ -65,4 +68,23 @@ export const logoutUser = async (token) => {
   const session = await SessionCollection.findOne({ accessToken: token });
 
   await SessionCollection.deleteOne({ _id: session._id });
+};
+
+export const userInformation = async (token) => {
+  const session = await SessionCollection.findOne({ accessToken: token });
+
+  const userId = session.userId;
+
+  const user = await UsersCollection.findById(userId);
+
+  return user;
+};
+
+export const updatingUserData = async (token, payload, options = {}) => {
+  const session = await SessionCollection.findOne({ accessToken: token });
+  const userId = session.userId;
+
+  const updateUser = await UsersCollection.findById(userId);
+
+  console.log(updateUser);
 };

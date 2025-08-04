@@ -1,4 +1,10 @@
-import { loginUser, logoutUser, registerUser } from '../services/auth.js';
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  updatingUserData,
+  userInformation,
+} from '../services/auth.js';
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -16,7 +22,7 @@ export const loginUserController = async (req, res) => {
   // console.log(req.body);
   const session = await loginUser(req.body);
 
-  console.log(session);
+  // console.log(session);
 
   res.json({
     status: 200,
@@ -37,4 +43,37 @@ export const logoutUserController = async (req, res) => {
     await logoutUser(token);
   }
   res.status(204).send();
+};
+
+export const userInformationController = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const user = await userInformation(token);
+
+  // console.log(user);
+
+  res.json({
+    status: 200,
+    message: 'User data',
+    data: {
+      name: user.name,
+      email: user.email,
+      age: user.age,
+      weight: user.weight,
+      height: user.height,
+      userId: user._id,
+    },
+  });
+};
+
+export const updatingUserDataController = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const updatedUser = await updatingUserData(token, req.body, { upsert: true });
+
+  // console.log(updatedUser);
+
+  res.json({
+    status: 200,
+    message: 'User data has been updated!',
+    data: {},
+  });
 };
