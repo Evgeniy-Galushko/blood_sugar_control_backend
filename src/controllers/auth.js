@@ -65,15 +65,22 @@ export const userInformationController = async (req, res) => {
   });
 };
 
-export const updatingUserDataController = async (req, res) => {
+export const updatingUserDataController = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   const updatedUser = await updatingUserData(token, req.body, { upsert: true });
 
-  // console.log(updatedUser);
+  const status = updatedUser.isNew ? 201 : 200;
 
   res.json({
-    status: 200,
+    status: status,
     message: 'User data has been updated!',
-    data: {},
+    data: {
+      userId: updatedUser.updatedUser._id,
+      name: updatedUser.updatedUser.name,
+      email: updatedUser.updatedUser.email,
+      age: updatedUser.updatedUser.age,
+      weight: updatedUser.updatedUser.weight,
+      height: updatedUser.updatedUser.height,
+    },
   });
 };

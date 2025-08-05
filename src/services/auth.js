@@ -84,7 +84,16 @@ export const updatingUserData = async (token, payload, options = {}) => {
   const session = await SessionCollection.findOne({ accessToken: token });
   const userId = session.userId;
 
-  const updateUser = await UsersCollection.findById(userId);
+  const updatedUser = await UsersCollection.findOneAndUpdate(userId, payload, {
+    new: true,
+    includeResultMetadata: true,
+    ...options,
+  });
 
-  console.log(updateUser);
+  if (!updatedUser || !updatedUser.value) return null;
+
+  return {
+    updatedUser: updatedUser.value,
+    isNew: Boolean(updatedUser?.lastErrorObject.upserted),
+  };
 };
