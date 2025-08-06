@@ -2,14 +2,15 @@
   "name": "blood_sugar_control_backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint src/**/*.js",
     "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
     "build": "npm run build-docs",
-    "build-docs": "redocly bundle docs/openapi.yaml --ext json -o docs/swagger.json",
-    "preview-docs": "redocly preview-docs"
+    "build-docs": "redocly build-docs docs/openapi.yaml --output docs/index.html",
+    "preview": "npm run build-docs && live-server docs"
   },
   "keywords": [],
   "author": "Galushko Evgeniy <yudginchik@gmail.com>",
@@ -17,12 +18,13 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@redocly/cli": "^2.0.2",
     "eslint": "^9.32.0",
     "globals": "^16.3.0",
+    "live-server": "^1.2.2",
     "nodemon": "^3.1.10"
   },
   "dependencies": {
-    "@redocly/cli": "^2.0.2",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
