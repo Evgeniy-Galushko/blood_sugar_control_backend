@@ -2,10 +2,12 @@ import createHttpError from 'http-errors';
 import {
   addMeasurementTime,
   allSugarMeasurements,
+  deleteMeasurement,
   oneDay,
   oneMonth,
+  sixMonths,
 } from '../services/measurement.js';
-import dateConversion from '../utils/dateConversion.js';
+import { dateConversion, inSixMonths } from '../utils/dateConversion.js';
 
 export const addMeasurementTimeController = async (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
@@ -83,4 +85,48 @@ export const oneMonthController = async (req, res) => {
         message: 'Data for the month',
         date: oneMonths,
       });
+};
+
+export const inSixMonthsController = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const date = req.query.month;
+
+  if (date.length < 10 || date.length > 10) {
+    throw createHttpError(
+      404,
+      'Incorrect date! Date must match this format "2025-03-18"!',
+    );
+  }
+
+  const period = inSixMonths(date);
+  const beginning = period.beginningOfPeriod;
+  const end = period.endOfPeriod;
+
+  const dataSixMonths = await sixMonths(token, beginning, end);
+
+  dataSixMonths.length === 0
+    ? res.json({
+        status: 200,
+        message: 'There are no entries for this period!',
+        data: dataSixMonths,
+      })
+    : res.json({
+        state: 200,
+        message: 'Data for the month',
+        date: dataSixMonths,
+      });
+};
+
+export const deleteMeasurementController = async (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const { id } = req.params;
+
+  const result = await deleteMeasurement(token, id);
+
+  if (!result) {
+    next(createHttpError(404, 'There is no such entry!'));
+    return;
+  }
+
+  res.status(204).send();
 };

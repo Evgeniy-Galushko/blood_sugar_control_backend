@@ -10,9 +10,12 @@ import {
 import {
   addMeasurementTimeController,
   allSugarMeasurementsController,
+  deleteMeasurementController,
+  inSixMonthsController,
   oneDayController,
   oneMonthController,
 } from '../controllers/measurements.js';
+import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
 
@@ -43,11 +46,18 @@ router.get(
   ctrlWrapper(oneMonthController),
 );
 
-router.delete(
-  '/delete-measurement',
+router.get(
+  '/in-six-months',
   authenticate,
+  validateBody(validationOneMonthShema),
+  ctrlWrapper(inSixMonthsController),
+);
 
-  ctrlWrapper(),
+router.delete(
+  '/delete-measurement/:id',
+  authenticate,
+  isValidId,
+  ctrlWrapper(deleteMeasurementController),
 );
 
 export default router;
