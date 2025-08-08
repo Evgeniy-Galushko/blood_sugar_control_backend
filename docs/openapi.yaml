@@ -9,10 +9,8 @@ info:
 tags:
   - name: User
     description: User registration
-  # - name: Product
-  #   description: List of medicines
-  # - name: Order
-  #   description: List of items in the cart
+  - name: Measurements
+    description: Measuring blood sugar levels
 servers:
   - url: http://localhost:3000
   - url: https://blood-sugar-control-backend.onrender.com
@@ -20,9 +18,27 @@ paths:
   /api/user/register:
     post:
       $ref: ../docs/swagger/paths/auth/postRegister.yaml
-# /api/user/login:
-#   post:
-#     $ref: ../docs/swagger/paths/auth/postLogin.yaml
+  /api/user/login:
+    post:
+      $ref: ../docs/swagger/paths/auth/postLogin.yaml
+  /api/user/logout:
+    post:
+      $ref: ../docs/swagger/paths/auth/postLogout.yaml
+  /api/user/userInformation:
+    get:
+      $ref: ../docs/swagger/paths/auth/getUserinformation.yaml
+  /api/user/updating:
+    get:
+      $ref: ../docs/swagger/paths/auth/putUpdating.yaml
+  /api/measurements/add:
+    post:
+      $ref: ../docs/swagger/paths/measurements/postAddMeasurements.yaml
+  /api/measurements/all-dimensions:
+    get:
+      $ref: ../docs/swagger/paths/measurements/getAllDimensions.yaml
+  # /api/measurements/in-one-day:
+  # get:
+  # $ref: ../docs/swagger/paths/measurements/getInOneDay.yaml
 components:
   securitySchemes:
     bearerAuth:

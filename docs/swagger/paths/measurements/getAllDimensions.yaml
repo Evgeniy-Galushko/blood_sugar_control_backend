@@ -1,0 +1,61 @@
+tags:
+  - Measurements
+summary: All user measurements
+operationId: allMeasurements
+description: All user measurements
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: 'List of all sugar measurements!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: List of all sugar measurements!
+            data:
+              type: object
+              required:
+                - _id
+                - date
+                - time
+                - sugarLevel
+                - measurementTime
+                - userId
+              properties:
+                _id:
+                  description: 'Measurement identifier'
+                  type: string
+                  example: '6892141e4c72ce0623953b5e'
+                date:
+                  description: 'Date of measurement'
+                  type: string
+                  example: '2025-08-05'
+                time:
+                  description: 'Time of measurement'
+                  type: string
+                  example: '12.40'
+                sugarLevel:
+                  description: 'Sugar level'
+                  type: number
+                  example: 5.8
+                measurementTime:
+                  description: 'Period of measurement'
+                  type: string
+                  example: 'после еды'
+                userId:
+                  description: 'User id'
+                  type: string
+                  example: '6890b0ab055da8d96cf33186'
+  '401':
+    $ref: ../../components/responses/401.yaml

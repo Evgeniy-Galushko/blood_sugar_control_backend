@@ -1,0 +1,61 @@
+tags:
+  - User
+summary: User info
+operationId: infoUser
+description: User info
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: 'User information'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: User data
+            data:
+              type: object
+              required:
+                - name
+                - email
+                - age
+                - weight
+                - height
+                - userId
+              properties:
+                name:
+                  description: 'User name'
+                  type: string
+                  example: 'John'
+                email:
+                  description: 'User email'
+                  type: string
+                  example: 'john@gmail.com'
+                age:
+                  description: 'User age'
+                  type: number
+                  example: 52
+                weight:
+                  description: 'User weight'
+                  type: number
+                  example: 65
+                height:
+                  description: 'User height'
+                  type: number
+                  example: 175
+                userId:
+                  description: 'User id'
+                  type: string
+                  example: '6890b0ab055da8d96cf33186'
+  '401':
+    $ref: ../../components/responses/401.yaml

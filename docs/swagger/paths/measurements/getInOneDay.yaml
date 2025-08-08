@@ -1,0 +1,7 @@
+tags:
+  - Measurements
+summary: Measurements in one day
+operationId: getInOneDay
+description: Measurements in one day
+security:
+  - bearerAuth: []

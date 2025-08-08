@@ -1,0 +1,83 @@
+tags:
+  - User
+summary: Updating user inform
+operationId: updatingUser
+description: Updating user inform
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          age:
+            description: 'User age'
+            type: number
+            example: 50
+          weight:
+            description: 'User weight'
+            type: number
+            example: 60
+          height:
+            description: 'User height'
+            type: number
+            example: 170
+          name:
+            description: 'User name'
+            type: string
+            example: 'Wick'
+responses:
+  '200':
+    description: 'User data has been updated!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'User data has been updated!'
+            data:
+              type: object
+              required:
+                - userId
+                - name
+                - email
+                - age
+                - weight
+                - height
+              properties:
+                userId:
+                  description: 'User id'
+                  type: string
+                  example: '6890b0ab055da8d96cf33186'
+                name:
+                  description: 'User name'
+                  type: string
+                  example: 'Wick'
+                email:
+                  description: 'User email'
+                  type: string
+                  example: 'john@gmail.com'
+                age:
+                  description: 'User age'
+                  type: number
+                  example: 50
+                weight:
+                  description: 'User weight'
+                  type: number
+                  example: 60
+                height:
+                  description: 'User height'
+                  type: number
+                  example: 170
+  '401':
+    $ref: ../../components/responses/401.yaml

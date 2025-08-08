@@ -1,0 +1,88 @@
+tags:
+  - Measurements
+summary: Adding blood sugar measurement
+operationId: addMeasurements
+description: Adding blood sugar measurement
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - date
+          - time
+          - sugarLevel
+          - measurementTime
+        properties:
+          date:
+            description: 'Date of measurement'
+            example: '2025-01-03'
+            type: string
+          time:
+            description: 'Time of measurement'
+            example: '10.00'
+            type: string
+          sugarLevel:
+            description: 'Sugar level'
+            example: 6
+            type: number
+          measurementTime:
+            description: 'Period of measurement'
+            type: string
+            enum: ['натощак', 'после еды']
+responses:
+  '201':
+    description: Blood sugar level added
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Blood sugar level added
+            data:
+              type: object
+              required:
+                - date
+                - time
+                - sugarLevel
+                - measurementTime
+                - userId
+                - _id
+              properties:
+                date:
+                  description: 'Date of measurement'
+                  example: '2025-01-03'
+                  type: string
+                time:
+                  description: 'Time of measurement'
+                  example: '10.00'
+                  type: string
+                sugarLevel:
+                  description: 'Sugar level'
+                  example: 6
+                  type: number
+                measurementTime:
+                  description: 'Period of measurement'
+                  type: string
+                  example: 'натощак'
+                userId:
+                  description: 'User id'
+                  example: '6890b0ab055da8d96cf33186'
+                  type: string
+                _id:
+                  description: 'record id'
+                  example: '68961093238eeb5afc36bdb6'
+                  type: string
+  '401':
+    $ref: ../../components/responses/401.yaml

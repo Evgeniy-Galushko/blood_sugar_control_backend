@@ -24,7 +24,7 @@ router.post(
   validateBody(loginUserSсheme),
   ctrlWrapper(loginUserController),
 );
-router.get('/logout', authenticate, ctrlWrapper(logoutUserController));
+router.post('/logout', authenticate, ctrlWrapper(logoutUserController));
 router.get(
   '/userInformation',
   authenticate,
