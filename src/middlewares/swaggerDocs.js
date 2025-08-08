@@ -6,7 +6,7 @@ import createHttpError from 'http-errors';
 export const swaggerDocs = () => {
   try {
     const swaggerDocs = JSON.parse(fs.readFileSync(SWAGGER_PATH).toString());
-    return [...swaggerDocs.serve, swaggerUI.setup(swaggerDocs)];
+    return [...swaggerUI.serve, swaggerUI.setup(swaggerDocs)];
   } catch (err) {
     console.log(err);
     return (req, res, next) =>
