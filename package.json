@@ -10,6 +10,7 @@
     "dev": "nodemon src/index.js",
     "build": "npm run build-docs",
     "build-docs": "redocly build-docs docs/openapi.yaml --output docs/index.html",
+    "preview-docs": "redocly preview-docs docs/openapi.yaml",
     "preview": "npm run build-docs && live-server docs"
   },
   "keywords": [],
