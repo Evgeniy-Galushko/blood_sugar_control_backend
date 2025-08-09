@@ -1,0 +1,42 @@
+tags:
+  - Measurements
+summary: Remove sugar measurement
+operationId: deleteMeasurements
+description: Remove sugar measurement
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '6892141e4c72ce0623953b5e'
+responses:
+  '204':
+    description: 'Deleting a measurement'
+  '404':
+    description: 'NotFoundError'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'There is no such entry!'

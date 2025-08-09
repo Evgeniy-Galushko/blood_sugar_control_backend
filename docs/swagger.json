@@ -849,6 +849,270 @@
           }
         }
       }
+    },
+    "/api/measurements/in-one-month": {
+      "get": {
+        "tags": [
+          "Measurements"
+        ],
+        "summary": "Measurements in one month",
+        "operationId": "inOneMonth",
+        "description": "Measurements in one month",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "month",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025-08"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data for the month!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data for the month!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "_id",
+                        "date",
+                        "time",
+                        "sugarLevel",
+                        "measurementTime",
+                        "userId"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "description": "Measurement identifier",
+                          "type": "string",
+                          "example": "6892141e4c72ce0623953b5e"
+                        },
+                        "date": {
+                          "description": "Date of measurement",
+                          "type": "string",
+                          "example": "2025-08-05"
+                        },
+                        "time": {
+                          "description": "Time of measurement",
+                          "type": "string",
+                          "example": "12.40"
+                        },
+                        "sugarLevel": {
+                          "description": "Sugar level",
+                          "type": "number",
+                          "example": 5.8
+                        },
+                        "measurementTime": {
+                          "description": "Period of measurement",
+                          "type": "string",
+                          "example": "натощак"
+                        },
+                        "userId": {
+                          "description": "User id",
+                          "type": "string",
+                          "example": "6890b0ab055da8d96cf33186"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/api/measurements/in-six-months": {
+      "get": {
+        "tags": [
+          "Measurements"
+        ],
+        "summary": "Measurements for six months",
+        "operationId": "inSixMonth",
+        "description": "Measurements for six months",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "month",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025-08-06"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data for six months!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data for six months!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "_id",
+                        "date",
+                        "time",
+                        "sugarLevel",
+                        "measurementTime",
+                        "userId"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "description": "Measurement identifier",
+                          "type": "string",
+                          "example": "6892141e4c72ce0623953b5e"
+                        },
+                        "date": {
+                          "description": "Date of measurement",
+                          "type": "string",
+                          "example": "2025-08-05"
+                        },
+                        "time": {
+                          "description": "Time of measurement",
+                          "type": "string",
+                          "example": "12.40"
+                        },
+                        "sugarLevel": {
+                          "description": "Sugar level",
+                          "type": "number",
+                          "example": 5.8
+                        },
+                        "measurementTime": {
+                          "description": "Period of measurement",
+                          "type": "string",
+                          "example": "натощак"
+                        },
+                        "userId": {
+                          "description": "User id",
+                          "type": "string",
+                          "example": "6890b0ab055da8d96cf33186"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/api/measurements/delete-measurement/{id}": {
+      "delete": {
+        "tags": [
+          "Measurements"
+        ],
+        "summary": "Remove sugar measurement",
+        "operationId": "deleteMeasurements",
+        "description": "Remove sugar measurement",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6892141e4c72ce0623953b5e"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleting a measurement"
+          },
+          "404": {
+            "description": "NotFoundError",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "There is no such entry!"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

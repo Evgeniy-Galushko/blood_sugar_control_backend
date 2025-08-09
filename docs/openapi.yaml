@@ -39,6 +39,15 @@ paths:
   /api/measurements/in-one-day:
     get:
       $ref: ../docs/swagger/paths/measurements/getInOneDay.yaml
+  /api/measurements/in-one-month:
+    get:
+      $ref: ../docs/swagger/paths/measurements/getOneMonth.yaml
+  /api/measurements/in-six-months:
+    get:
+      $ref: ../docs/swagger/paths/measurements/getSixMonths.yaml
+  /api/measurements/delete-measurement/{id}:
+    delete:
+      $ref: ../docs/swagger/paths/measurements/deleteMeasurement.yaml
 components:
   securitySchemes:
     bearerAuth:

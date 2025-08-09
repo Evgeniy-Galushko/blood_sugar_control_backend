@@ -81,9 +81,9 @@ export const oneMonthController = async (req, res) => {
         data: oneMonths,
       })
     : res.json({
-        state: 200,
+        status: 200,
         message: 'Data for the month',
-        date: oneMonths,
+        data: oneMonths,
       });
 };
 
@@ -111,9 +111,9 @@ export const inSixMonthsController = async (req, res) => {
         data: dataSixMonths,
       })
     : res.json({
-        state: 200,
-        message: 'Data for the month',
-        date: dataSixMonths,
+        status: 200,
+        message: 'Data for six months!',
+        data: dataSixMonths,
       });
 };
 
