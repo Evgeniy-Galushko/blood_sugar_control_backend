@@ -36,9 +36,9 @@ paths:
   /api/measurements/all-dimensions:
     get:
       $ref: ../docs/swagger/paths/measurements/getAllDimensions.yaml
-  # /api/measurements/in-one-day:
-  # get:
-  # $ref: ../docs/swagger/paths/measurements/getInOneDay.yaml
+  /api/measurements/in-one-day:
+    get:
+      $ref: ../docs/swagger/paths/measurements/getInOneDay.yaml
 components:
   securitySchemes:
     bearerAuth:
