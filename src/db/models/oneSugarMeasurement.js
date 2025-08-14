@@ -1,10 +1,27 @@
 import { model, Schema } from 'mongoose';
 
+// const oneSugarMeasurement = new Schema(
+//   {
+//     date: { type: String, required: true },
+//     time: { type: String, required: true },
+//     sugarLevel: { type: Number, required: true },
+//     measurementTime: {
+//       type: String,
+//       enum: ['натощак', 'после еды'],
+//       required: true,
+//       default: 'натощак',
+//     },
+//     userId: { type: Schema.Types.ObjectId, ref: 'users' },
+//   },
+//   { timestamps: true, versionKey: false },
+// );
+
 const oneSugarMeasurement = new Schema(
   {
     date: { type: String, required: true },
     time: { type: String, required: true },
-    sugarLevel: { type: Number, required: true },
+    onAnEmptyStomach: { type: Number, required: false },
+    afterEating: { type: Number, required: false },
     measurementTime: {
       type: String,
       enum: ['натощак', 'после еды'],
