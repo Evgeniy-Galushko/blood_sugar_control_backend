@@ -44,7 +44,23 @@ export const oneMonth = async (token, beginning, end) => {
     .gte(beginning)
     .lte(end);
 
-  return oneMonths;
+  const month = Object.values(
+    oneMonths.reduce((month, item) => {
+      const day = new Date(item.date).getDate();
+      if (!month[day]) {
+        month[day] = { day, sum: 0, count: 0 };
+      }
+      const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
+      month[day].sum += value;
+      month[day].count += 1;
+      return month;
+    }, {}),
+  ).map(({ day, sum, count }) => ({
+    day,
+    averageDailyRate: (sum / count).toFixed(2),
+  }));
+
+  return month;
 };
 
 export const sixMonths = async (token, beginning, end) => {
