@@ -73,12 +73,14 @@ export const oneMonth = async (token, beginning, end) => {
         };
       }
       // const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
-      if (item.onAnEmptyStomach != null) {
+      // item.onAnEmptyStomach != null;
+      if (!!item.onAnEmptyStomach) {
         month[day].sumAnEmpty += item.onAnEmptyStomach;
         month[day].countAnEmpty += 1;
       }
 
-      if (item.afterEating != null) {
+      // item.afterEating != null;
+      if (!!item.afterEating) {
         month[day].sumafter += item.afterEating;
         month[day].counafter += 1;
       }
