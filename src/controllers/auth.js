@@ -60,6 +60,7 @@ export const userInformationController = async (req, res) => {
       age: user.age,
       weight: user.weight,
       height: user.height,
+      bloodSugarNorm: user.bloodSugarNorm,
       userId: user._id,
     },
   });
@@ -68,6 +69,8 @@ export const userInformationController = async (req, res) => {
 export const updatingUserDataController = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   const updatedUser = await updatingUserData(token, req.body, { upsert: true });
+
+  console.log(updatedUser);
 
   const status = updatedUser.isNew ? 201 : 200;
 
@@ -81,6 +84,7 @@ export const updatingUserDataController = async (req, res, next) => {
       age: updatedUser.updatedUser.age,
       weight: updatedUser.updatedUser.weight,
       height: updatedUser.updatedUser.height,
+      bloodSugarNorm: updatedUser.updatedUser.bloodSugarNorm,
     },
   });
 };

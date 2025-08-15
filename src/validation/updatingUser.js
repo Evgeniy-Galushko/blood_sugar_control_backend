@@ -20,4 +20,7 @@ export const validationUpdatingUserData = Joi.object({
   height: Joi.number().messages({
     'string.base': 'Height is indicated as a number!',
   }),
+  bloodSugarNorm: Joi.number().messages({
+    'string.base': 'Height is indicated as a number!',
+  }),
 });
