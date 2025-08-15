@@ -44,20 +44,51 @@ export const oneMonth = async (token, beginning, end) => {
     .gte(beginning)
     .lte(end);
 
+  // const month = Object.values(
+  //   oneMonths.reduce((month, item) => {
+  //     const day = new Date(item.date).getDate();
+  //     if (!month[day]) {
+  //       month[day] = { day, sum: 0, count: 0 };
+  //     }
+  //     const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
+  //     month[day].sum += value;
+  //     month[day].count += 1;
+  //     return month;
+  //   }, {}),
+  // ).map(({ day, sum, count }) => ({
+  //   day,
+  //   averageDailyRate: (sum / count).toFixed(2),
+  // }));
+
   const month = Object.values(
     oneMonths.reduce((month, item) => {
       const day = new Date(item.date).getDate();
       if (!month[day]) {
-        month[day] = { day, sum: 0, count: 0 };
+        month[day] = {
+          day,
+          sumAnEmpty: 0,
+          countAnEmpty: 0,
+          sumafter: 0,
+          counafter: 0,
+        };
       }
-      const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
-      month[day].sum += value;
-      month[day].count += 1;
+      // const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
+      if (item.onAnEmptyStomach != null) {
+        month[day].sumAnEmpty += item.onAnEmptyStomach;
+        month[day].countAnEmpty += 1;
+      }
+
+      if (item.afterEating != null) {
+        month[day].sumafter += item.afterEating;
+        month[day].counafter += 1;
+      }
+
       return month;
     }, {}),
-  ).map(({ day, sum, count }) => ({
+  ).map(({ day, sumAnEmpty, countAnEmpty, sumafter, counafter }) => ({
     day,
-    averageDailyRate: (sum / count).toFixed(2),
+    onAnEmptyStomach: (sumAnEmpty / countAnEmpty).toFixed(2),
+    afterEating: (sumafter / counafter).toFixed(2),
   }));
 
   return month;
