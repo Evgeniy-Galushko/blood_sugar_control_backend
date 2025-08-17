@@ -9,6 +9,7 @@ const userSchema = new Schema(
     weight: { type: Number, required: false },
     height: { type: Number, required: false },
     bloodSugarNorm: { type: Number, required: false },
+    gender: { type: String, required: false },
   },
   { timestamps: true, versionKey: false },
 );

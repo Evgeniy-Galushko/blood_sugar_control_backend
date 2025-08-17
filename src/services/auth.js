@@ -22,6 +22,7 @@ export const registerUser = async (payload) => {
     weight: null,
     height: null,
     bloodSugarNorm: null,
+    gender: null,
     token: accessToken,
     password: encryptedPassword,
   });

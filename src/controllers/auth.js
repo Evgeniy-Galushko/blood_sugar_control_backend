@@ -60,6 +60,7 @@ export const userInformationController = async (req, res) => {
       age: user.age,
       weight: user.weight,
       height: user.height,
+      gender: user.gender,
       bloodSugarNorm: user.bloodSugarNorm,
       userId: user._id,
     },
@@ -84,6 +85,7 @@ export const updatingUserDataController = async (req, res, next) => {
       age: updatedUser.updatedUser.age,
       weight: updatedUser.updatedUser.weight,
       height: updatedUser.updatedUser.height,
+      gender: updatedUser.updatedUser.gender,
       bloodSugarNorm: updatedUser.updatedUser.bloodSugarNorm,
     },
   });
